@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Helvetica; color: #000000; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px 'Courier New'; color: #0a0a0b; -webkit-text-stroke: #0a0a0b}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">import React, { useState, useRef } from "react";</span></p>
+<p class="p2"><span class="s1">import { TimeEntry } from "@/entities/TimeEntry";</span></p>
+<p class="p2"><span class="s1">import { Settings } from "@/entities/Settings";</span></p>
+<p class="p2"><span class="s1">import { Arbeit2Entry } from "@/entities/Arbeit2Entry";</span></p>
+<p class="p2"><span class="s1">import { Upload } from "lucide-react";</span></p>
+<p class="p2"><span class="s1">import { createPageUrl } from "@/utils";</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">export default function WiederherstellenPage() {</span></p>
+<p class="p2"><span class="s1">  const [message, setMessage] = useState(null);</span></p>
+<p class="p2"><span class="s1">  const [isLoading, setIsLoading] = useState(false);</span></p>
+<p class="p2"><span class="s1">  const [progress, setProgress] = useState(0);</span></p>
+<p class="p2"><span class="s1">  const [progressText, setProgressText] = useState('');</span></p>
+<p class="p2"><span class="s1">  const [backupData, setBackupData] = useState(null);</span></p>
+<p class="p2"><span class="s1">  const fileInputRef = useRef(null);</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">  const showToast = (type, text) =&gt; {</span></p>
+<p class="p2"><span class="s1">    setMessage({ type, text });</span></p>
+<p class="p2"><span class="s1">    setTimeout(() =&gt; setMessage(null), 5000);</span></p>
+<p class="p2"><span class="s1">  };</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">  const handleRestoreClick = () =&gt; {</span></p>
+<p class="p2"><span class="s1">    fileInputRef.current.click();</span></p>
+<p class="p2"><span class="s1">  };</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">  const handleFileSelect = (e) =&gt; {</span></p>
+<p class="p2"><span class="s1">    const file = e.target.files[0];</span></p>
+<p class="p2"><span class="s1">    if (!file) return;</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">    const reader = new FileReader();</span></p>
+<p class="p2"><span class="s1">    reader.onload = (event) =&gt; {</span></p>
+<p class="p2"><span class="s1">      try {</span></p>
+<p class="p2"><span class="s1">        const content = event.target.result;</span></p>
+<p class="p2"><span class="s1">        const data = JSON.parse(content);</span></p>
+<p class="p2"><span class="s1">       <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">        if (!data.timeEntries &amp;&amp; !data.arbeit2Entries &amp;&amp; !data.settings) {</span></p>
+<p class="p2"><span class="s1">          showToast('error', 'Ungültiges Backup-Format.');</span></p>
+<p class="p2"><span class="s1">          return;</span></p>
+<p class="p2"><span class="s1">        }</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">        setBackupData(data);</span></p>
+<p class="p2"><span class="s1">        performRestore(data);</span></p>
+<p class="p2"><span class="s1">       <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">      } catch (error) {</span></p>
+<p class="p2"><span class="s1">        console.error('Fehler beim Lesen der Datei:', error);</span></p>
+<p class="p2"><span class="s1">        showToast('error', 'Fehler beim Lesen der Backup-Datei.');</span></p>
+<p class="p2"><span class="s1">      }</span></p>
+<p class="p2"><span class="s1">    };</span></p>
+<p class="p2"><span class="s1">    reader.readAsText(file);</span></p>
+<p class="p2"><span class="s1">    e.target.value = null;</span></p>
+<p class="p2"><span class="s1">  };</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">  const performRestore = async (data) =&gt; {</span></p>
+<p class="p2"><span class="s1">    setIsLoading(true);</span></p>
+<p class="p2"><span class="s1">    setProgress(0);</span></p>
+<p class="p2"><span class="s1">   <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">    try {</span></p>
+<p class="p2"><span class="s1">      setProgressText('Lösche alte Daten...');</span></p>
+<p class="p2"><span class="s1">      const [existingTimeEntries, existingArbeit2Entries, existingSettings] = await Promise.all([</span></p>
+<p class="p2"><span class="s1">        TimeEntry.list(),</span></p>
+<p class="p2"><span class="s1">        Arbeit2Entry.list(),</span></p>
+<p class="p2"><span class="s1">        Settings.list()</span></p>
+<p class="p2"><span class="s1">      ]);</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">      const deletePromises = [</span></p>
+<p class="p2"><span class="s1">        ...existingTimeEntries.map(entry =&gt; TimeEntry.delete(entry.id)),</span></p>
+<p class="p2"><span class="s1">        ...existingArbeit2Entries.map(entry =&gt; Arbeit2Entry.delete(entry.id)),</span></p>
+<p class="p2"><span class="s1">        ...existingSettings.map(setting =&gt; Settings.delete(setting.id))</span></p>
+<p class="p2"><span class="s1">      ];</span></p>
+<p class="p2"><span class="s1">     <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">      if (deletePromises.length &gt; 0) {</span></p>
+<p class="p2"><span class="s1">        await Promise.all(deletePromises);</span></p>
+<p class="p2"><span class="s1">      }</span></p>
+<p class="p2"><span class="s1">      setProgress(33);</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">      setProgressText('Bereite Backup-Daten vor...');</span></p>
+<p class="p2"><span class="s1">      const cleanData = (entries) =&gt; {</span></p>
+<p class="p2"><span class="s1">        if (!entries || !Array.isArray(entries)) return [];</span></p>
+<p class="p2"><span class="s1">        return entries.map(entry =&gt; {</span></p>
+<p class="p2"><span class="s1">          const { id, created_date, updated_date, created_by, ...entryData } = entry;</span></p>
+<p class="p2"><span class="s1">          return entryData;</span></p>
+<p class="p2"><span class="s1">        });</span></p>
+<p class="p2"><span class="s1">      };</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">      const timeEntriesToCreate = cleanData(data.timeEntries);</span></p>
+<p class="p2"><span class="s1">      const arbeit2EntriesToCreate = cleanData(data.arbeit2Entries);</span></p>
+<p class="p2"><span class="s1">      const settingsToCreate = cleanData(data.settings);</span></p>
+<p class="p2"><span class="s1">      setProgress(66);</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">      setProgressText('Importiere neue Einträge...');</span></p>
+<p class="p2"><span class="s1">      const createPromises = [];</span></p>
+<p class="p2"><span class="s1">      if (timeEntriesToCreate.length &gt; 0) {</span></p>
+<p class="p2"><span class="s1">        createPromises.push(TimeEntry.bulkCreate(timeEntriesToCreate));</span></p>
+<p class="p2"><span class="s1">      }</span></p>
+<p class="p2"><span class="s1">      if (arbeit2EntriesToCreate.length &gt; 0) {</span></p>
+<p class="p2"><span class="s1">        createPromises.push(Arbeit2Entry.bulkCreate(arbeit2EntriesToCreate));</span></p>
+<p class="p2"><span class="s1">      }</span></p>
+<p class="p2"><span class="s1">      if (settingsToCreate.length &gt; 0) {</span></p>
+<p class="p2"><span class="s1">        createPromises.push(Settings.bulkCreate(settingsToCreate));</span></p>
+<p class="p2"><span class="s1">      }</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">      if (createPromises.length &gt; 0) {</span></p>
+<p class="p2"><span class="s1">        await Promise.all(createPromises);</span></p>
+<p class="p2"><span class="s1">      }</span></p>
+<p class="p2"><span class="s1">      setProgress(100);</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">      showToast('success', 'Wiederherstellung erfolgreich! Leite weiter...');</span></p>
+<p class="p2"><span class="s1">     <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">      setTimeout(() =&gt; {</span></p>
+<p class="p2"><span class="s1">        window.location.href = createPageUrl('Arbeit2');</span></p>
+<p class="p2"><span class="s1">      }, 2000);</span></p>
+<p class="p2"><span class="s1">     <span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">    } catch (error) {</span></p>
+<p class="p2"><span class="s1">      console.error('Wiederherstellungs-Fehler:', error);</span></p>
+<p class="p2"><span class="s1">      showToast('error', 'Fehler bei der Wiederherstellung.');</span></p>
+<p class="p2"><span class="s1">      setIsLoading(false);</span></p>
+<p class="p2"><span class="s1">      setProgress(0);</span></p>
+<p class="p2"><span class="s1">      setProgressText('');</span></p>
+<p class="p2"><span class="s1">    }</span></p>
+<p class="p2"><span class="s1">  };</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">  if (isLoading) {</span></p>
+<p class="p2"><span class="s1">    return (</span></p>
+<p class="p2"><span class="s1">      &lt;div className="flex flex-col items-center justify-center" style={{ minHeight: 'calc(100vh - 10rem)' }}&gt;</span></p>
+<p class="p2"><span class="s1">        &lt;div className="w-96 bg-gray-700/50 rounded-full h-4 overflow-hidden mb-4"&gt;</span></p>
+<p class="p2"><span class="s1">          &lt;div<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">            className="bg-yellow-400 h-4 rounded-full transition-all duration-300 ease-linear"<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1">            style={{ width: `${progress}%` }}</span></p>
+<p class="p2"><span class="s1">          &gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1">        &lt;/div&gt;</span></p>
+<p class="p2"><span class="s1">        &lt;p className="mt-4 text-gray-400"&gt;{progressText} {Math.round(progress)}%&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1">      &lt;/div&gt;</span></p>
+<p class="p2"><span class="s1">    );</span></p>
+<p class="p2"><span class="s1">  }</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">  return (</span></p>
+<p class="p2"><span class="s1">    &lt;div className="font-inter mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-6"&gt;</span></p>
+<p class="p2"><span class="s1">      {message &amp;&amp; (</span></p>
+<p class="p2"><span class="s1">        &lt;div className={`toast-container p-4 rounded-lg text-sm text-center font-medium shadow-lg ${</span></p>
+<p class="p2"><span class="s1">          message.type === 'success' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'</span></p>
+<p class="p2"><span class="s1">        }`} role="alert"&gt;</span></p>
+<p class="p2"><span class="s1">          {message.text}</span></p>
+<p class="p2"><span class="s1">        &lt;/div&gt;</span></p>
+<p class="p2"><span class="s1">      )}</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">      &lt;input</span></p>
+<p class="p2"><span class="s1">        type="file"</span></p>
+<p class="p2"><span class="s1">        ref__={fileInputRef}</span></p>
+<p class="p2"><span class="s1">        onChange={handleFileSelect}</span></p>
+<p class="p2"><span class="s1">        className="hidden"</span></p>
+<p class="p2"><span class="s1">        accept="application/json"</span></p>
+<p class="p2"><span class="s1">      /&gt;</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">      &lt;div className="glassmorphism p-8 rounded-xl max-w-2xl mx-auto"&gt;</span></p>
+<p class="p2"><span class="s1">        &lt;div className="text-center mb-8"&gt;</span></p>
+<p class="p2"><span class="s1">          &lt;h1 className="text-3xl font-bold text-gray-100 mb-4"&gt;Daten wiederherstellen&lt;/h1&gt;</span></p>
+<p class="p2"><span class="s1">          &lt;p className="text-gray-400"&gt;</span></p>
+<p class="p2"><span class="s1">            Backup-Datei auswählen startet sofort die Wiederherstellung.</span></p>
+<p class="p2"><span class="s1">          &lt;/p&gt;</span></p>
+<p class="p2"><span class="s1">        &lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"> </span></p>
+<p class="p2"><span class="s1">        &lt;div className="text-center h-24 flex flex-col justify-center"&gt;</span></p>
+<p class="p2"><span class="s1">            &lt;button</span></p>
+<p class="p2"><span class="s1">              onClick={handleRestoreClick}</span></p>
+<p class="p2"><span class="s1">              className="button-3d button-active px-8 py-4 text-white font-semibold rounded-lg shadow-lg transition-all duration-200"</span></p>
+<p class="p2"><span class="s1">            &gt;</span></p>
+<p class="p2"><span class="s1">              &lt;div className="flex items-center justify-center gap-3"&gt;</span></p>
+<p class="p2"><span class="s1">                &lt;Upload className="w-5 h-5" /&gt;</span></p>
+<p class="p2"><span class="s1">                &lt;span&gt;Backup-Datei auswählen&lt;/span&gt;</span></p>
+<p class="p2"><span class="s1">              &lt;/div&gt;</span></p>
+<p class="p2"><span class="s1">            &lt;/button&gt;</span></p>
+<p class="p2"><span class="s1">        &lt;/div&gt;</span></p>
+<p class="p2"><span class="s1">      &lt;/div&gt;</span></p>
+<p class="p2"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p2"><span class="s1">  );</span></p>
+<p class="p2"><span class="s1">}</span></p>
+<p class="p1"><span class="s1"> </span></p>
+</body>
+</html>
