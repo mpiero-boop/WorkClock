@@ -1,0 +1,150 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2865
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 CourierNewPSMT;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red10\green10\blue11;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c3529\c3529\c4314;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs20 \cf2 \expnd0\expndtw0\kerning0
+\{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0 "name": "Arbeit2Entry",
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0 "type": "object",
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0 "properties": \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 "date": \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "type": "string",
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "Datum als DD.MM Format"
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 "day": \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "type": "string",
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "Wochentag (Mo, Di, etc.)"
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 "vmStart": \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "type": "string",
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "Vormittag Start Zeit"
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 "vmEnd": \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "type": "string",
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "Vormittag Ende Zeit"
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 "nmStart": \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "type": "string",
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "Nachmittag Start Zeit"
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 "nmEnd": \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "type": "string",
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "Nachmittag Ende Zeit"
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 "pause": \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "type": "string",
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "Pause Zeit"
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 "hours": \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "type": "string",
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "Gesamtarbeitsstunden"
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 "month": \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "type": "integer",
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "Monat (0-11)"
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 "year": \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "type": "integer",
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "Jahr"
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0 \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0 "required": ["date", "month", "year"]
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \}
+\f1\fs32 \cf3 \
+}

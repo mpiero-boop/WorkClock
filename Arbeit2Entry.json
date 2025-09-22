@@ -1,0 +1,4033 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2865
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 CourierNewPSMT;\f1\fswiss\fcharset0 Helvetica;\f2\fswiss\fcharset0 ArialMT;
+}
+{\colortbl;\red255\green255\blue255;\red10\green10\blue11;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c3529\c3529\c4314;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs20 \cf2 \expnd0\expndtw0\kerning0
+import React from "react";
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 import \{ Link, useLocation \} from "react-router-dom";
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 import \{ createPageUrl \} from "@/utils";
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 import \{ Clock, Calculator, BarChart3, Download, Upload, Settings \} from "lucide-react";
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 // Block 1: Hauptfunktionen
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 const block1Items = [
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 \{ title: "Zeiterfassung", url: createPageUrl("Arbeit2"), icon: Clock \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 \{ title: "Lohnberechnung", url: createPageUrl("Lohn"), icon: Calculator \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 \{ title: "Jahresbilanz", url: createPageUrl("Jahresbilanz"), icon: BarChart3 \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 ];
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 // Block 2: Datenverwaltung
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 const block2Items = [
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 \{ title: "Wiederherstellen", url: createPageUrl("Wiederherstellen"), icon: Upload \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 \{ title: "Backup", url: createPageUrl("Backup"), icon: Download \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 ];
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 export default function Layout(\{ children \}) \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 const location = useLocation();
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 return (
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0 <div style=\{\{ minHeight: '100vh', background: 'linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)', fontFamily: 'Inter, sans-serif' \}\}>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 <style>\{`
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 * \{ 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 margin: 0; 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 padding: 0; 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-sizing: border-box; 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 body \{ 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460) !important; 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 color: #e2e8f0 !important; 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 font-family: 'Inter', sans-serif !important;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .main-container \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3), transparent 50%),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3), transparent 50%),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 radial-gradient(circle at 40% 40%, rgba(120, 198, 255, 0.3), transparent 50%),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: backgroundShift 20s ease-in-out infinite;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes backgroundShift \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0%, 100% \{ filter: hue-rotate(0deg) saturate(1); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 50% \{ filter: hue-rotate(30deg) saturate(1.2); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .glassmorphism \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 linear-gradient(135deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 255, 255, 0.1) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 255, 255, 0.05) 25%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 255, 255, 0.02) 50%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 255, 255, 0.08) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 backdrop-filter: blur(20px) saturate(180%);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 1px solid rgba(255, 255, 255, 0.15);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 16px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 20px 60px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 10px 30px rgba(0, 0, 0, 0.2),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.25),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 overflow: hidden;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .glassmorphism::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: -100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: left 0.8s;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .glassmorphism:hover::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .glassmorphism:hover \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: translateY(-8px);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 35px 120px rgba(0, 0, 0, 0.5),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 25px 60px rgba(0, 0, 0, 0.4),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 15px 30px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.35),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-color: rgba(255, 255, 255, 0.25);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .sidebar-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 linear-gradient(180deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(30, 30, 70, 0.95) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(20, 25, 50, 0.98) 50%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(15, 20, 40, 0.99) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 backdrop-filter: blur(25px) saturate(200%);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-right: 2px solid rgba(255, 255, 255, 0.1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 15px 0 50px rgba(0, 0, 0, 0.5),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 8px 0 25px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset -2px 0 0 rgba(255, 255, 255, 0.08);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 overflow: hidden;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .sidebar-3d::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 right: -3px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 3px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(180deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(120, 119, 198, 0.8), 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 119, 198, 0.6), 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(120, 198, 255, 0.8)
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: sidebarGlow 3s ease-in-out infinite alternate;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes sidebarGlow \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ opacity: 0.3; transform: scaleY(0.8); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ opacity: 1; transform: scaleY(1.2); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .sidebar-title \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background-clip: text;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 -webkit-background-clip: text;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 -webkit-text-fill-color: transparent;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: titleGlow 2s ease-in-out infinite alternate;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes titleGlow \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ filter: brightness(1); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ filter: brightness(1.3); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 overflow: hidden;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 15px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(255, 255, 255, 0.03);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 1px solid rgba(255, 255, 255, 0.05);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-3d::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: -100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(90deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transparent, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 255, 255, 0.1), 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(120, 119, 198, 0.2),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 255, 255, 0.1), 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transparent
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: left 0.6s ease;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-3d:hover::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-3d::after \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: translate(-50%, -50%);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.4s ease;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-3d:hover::after \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 200px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 200px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-3d:hover \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: translateY(-5px);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 15px 40px rgba(0, 0, 0, 0.4),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 8px 20px rgba(120, 119, 198, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(255, 255, 255, 0.08);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-color: rgba(255, 255, 255, 0.15);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-active \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(135deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(102, 126, 234, 0.8) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(118, 75, 162, 0.8) 50%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(120, 119, 198, 0.8) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 10px 30px rgba(102, 126, 234, 0.5),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 5px 15px rgba(118, 75, 162, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-color: rgba(255, 255, 255, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: activeGlow 2s ease-in-out infinite alternate;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes activeGlow \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5), 0 5px 15px rgba(118, 75, 162, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ box-shadow: 0 15px 45px rgba(102, 126, 234, 0.7), 0 8px 25px rgba(118, 75, 162, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .button-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(145deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(71, 85, 105, 0.8) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(51, 65, 85, 0.9) 50%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(30, 41, 59, 0.95) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 1px solid rgba(148, 163, 184, 0.4);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 12px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 8px 20px rgba(0, 0, 0, 0.2),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 4px 10px rgba(0, 0, 0, 0.15),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.2),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 overflow: hidden;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 cursor: pointer;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .button-3d::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: -50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: -50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 200%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 200%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: rotate(45deg);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.6s;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 opacity: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .button-3d:hover::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: buttonShine 0.6s ease-out;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes buttonShine \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ opacity: 0; transform: translateX(-100%) translateY(-100%) rotate(45deg); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 50% \{ opacity: 1; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ opacity: 0; transform: translateX(100%) translateY(100%) rotate(45deg); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .button-3d:hover \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: translateY(-5px);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 20px 50px rgba(0, 0, 0, 0.4),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 10px 25px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-color: rgba(148, 163, 184, 0.6);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .button-3d:active \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: translateY(-2px);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 8px 20px rgba(0, 0, 0, 0.5),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 3px 8px rgba(0, 0, 0, 0.4);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .button-active \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(145deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(102, 126, 234, 0.9) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(118, 75, 162, 0.9) 50%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(59, 130, 246, 0.9) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 12px 35px rgba(102, 126, 234, 0.5),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 6px 18px rgba(118, 75, 162, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.3);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: buttonActiveGlow 2s ease-in-out infinite alternate;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes buttonActiveGlow \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5), 0 6px 18px rgba(118, 75, 162, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ box-shadow: 0 18px 50px rgba(102, 126, 234, 0.7), 0 10px 30px rgba(118, 75, 162, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .table-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 linear-gradient(135deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(51, 65, 85, 0.6) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(30, 41, 59, 0.7) 50%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(15, 23, 42, 0.8) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 backdrop-filter: blur(15px) saturate(180%);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 1px solid rgba(148, 163, 184, 0.25);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 16px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 20px 60px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 10px 30px rgba(0, 0, 0, 0.2),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.15),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 overflow: hidden;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .table-3d::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 right: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(90deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transparent,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(102, 126, 234, 0.8),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(118, 75, 162, 0.8),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(120, 119, 198, 0.8),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transparent
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: tableHeaderGlow 3s ease-in-out infinite;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes tableHeaderGlow \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0%, 100% \{ opacity: 0.5; transform: scaleX(0.8); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 50% \{ opacity: 1; transform: scaleX(1.2); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .table-row-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(71, 85, 105, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .table-row-3d:hover \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(100, 116, 139, 0.4);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: translateX(5px);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 -5px 0 20px rgba(102, 126, 234, 0.2),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 5px 15px rgba(0, 0, 0, 0.3);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-left: 2px solid rgba(102, 126, 234, 0.6);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .input-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 linear-gradient(135deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(30, 41, 59, 0.9) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(15, 23, 42, 0.95) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 1px solid rgba(148, 163, 184, 0.4);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 10px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 color: #e2e8f0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 2px 5px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.1),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 1px 2px rgba(0, 0, 0, 0.1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 cursor: text;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 font-size: 14px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 font-weight: 400;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 min-height: 38px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 padding: 6px 10px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .input-3d::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 right: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 bottom: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(135deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(102, 126, 234, 0.1), 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transparent 50%, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(118, 75, 162, 0.1)
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: inherit;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 opacity: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: opacity 0.3s;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .input-3d:focus \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 3px 8px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 0 0 2px rgba(102, 126, 234, 0.6),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 8px 25px rgba(102, 126, 234, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 4px 15px rgba(0, 0, 0, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 outline: none;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-color: rgba(102, 126, 234, 0.8);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .input-3d:focus::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 opacity: 1;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .input-3d:read-only \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(45, 55, 72, 0.7);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 color: #94a3b8;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 cursor: default;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .loader \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 50px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 50px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 4px solid rgba(74, 85, 104, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-top: 4px solid transparent;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: spin 1s linear infinite;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .loader::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: -4px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: -4px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 right: -4px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 bottom: -4px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 4px solid transparent;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-top: 4px solid rgba(102, 126, 234, 0.8);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: spin 1.5s linear infinite reverse;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .loader::after \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 right: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 bottom: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 2px solid transparent;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-top: 2px solid rgba(118, 75, 162, 0.8);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: spin 0.8s linear infinite;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes spin \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ transform: rotate(0deg); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ transform: rotate(360deg); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .toast-container \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: fixed;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 bottom: 2rem;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 right: 2rem;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 z-index: 1000;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: toastSlideIn 0.5s ease-out;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes toastSlideIn \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ transform: translateY(100%); opacity: 0; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ transform: translateY(0); opacity: 1; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .version-tag \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 font-size: 0.7rem;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 color: rgba(160, 174, 192, 0.8);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 margin-left: 0.5rem;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(45deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 padding: 2px 8px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 10px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 1px solid rgba(255, 255, 255, 0.1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: versionPulse 3s ease-in-out infinite;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes versionPulse \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0%, 100% \{ opacity: 0.6; transform: scale(1); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 50% \{ opacity: 1; transform: scale(1.05); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .floating-particles \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: fixed;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 pointer-events: none;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 z-index: 1;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .particle \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(255, 255, 255, 0.1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: float 20s infinite linear;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes float \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ transform: translateY(100vh) rotate(0deg); opacity: 0; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 10% \{ opacity: 1; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 90% \{ opacity: 1; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ transform: translateY(-100px) rotate(360deg); opacity: 0; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @media (max-width: 768px) \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 .sidebar-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 backdrop-filter: blur(20px);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 ::-webkit-scrollbar \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 8px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 ::-webkit-scrollbar-track \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(30, 41, 59, 0.3);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 10px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 ::-webkit-scrollbar-thumb \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 10px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 ::-webkit-scrollbar-thumb:hover \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(135deg, rgba(102, 126, 234, 1), rgba(118, 75, 162, 1));
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 `\}</style>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 <div className="floating-particles">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \{[...Array(20)].map((_, i) => (
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <div
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 key=\{i\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 className="particle"
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 style=\{\{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: `$\{Math.random() * 100\}%`,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animationDelay: `$\{Math.random() * 20\}s`,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animationDuration: `$\{15 + Math.random() * 10\}s`
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 />
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 ))\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 <div className="flex w-full main-container">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 <aside className="w-64 flex-shrink-0 sidebar-3d p-4 flex flex-col relative self-start sticky top-0 h-screen">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <div className="mb-6">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <div className="flex items-center gap-3">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <div className="relative">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <Settings className="w-10 h-10 text-blue-400" />
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <Clock className="w-6 h-6 text-white absolute -bottom-1 -right-1" />
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <h1 className="text-2xl font-bold sidebar-title">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 WorkClock
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <span className="version-tag">V.3.5</span>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </h1>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <nav className="flex-grow">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <ul className="space-y-2">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \{block1Items.map((item) => \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 const isActive = location.pathname === item.url || 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 (item.url.includes('/Arbeit2') && location.pathname === '/');
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 return (
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <li key=\{item.title\}>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <Link
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 to=\{item.url\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 className=\{`flex items-center gap-3 px-3 py-2 text-sm font-medium nav-item-3d $\{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 isActive 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 ? 'nav-item-active text-white' 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 : 'text-gray-300 hover:text-white'
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}`\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 >
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <item.icon className="w-5 h-5 relative z-10" />
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <span className="relative z-10">\{item.title\}</span>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </Link>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </li>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \})\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </ul>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <div className="my-6 px-3">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Verwaltung</p>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <ul className="space-y-2">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \{block2Items.map((item) => \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 const isActive = location.pathname === item.url;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 return (
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <li key=\{item.title\}>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <Link
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 to=\{item.url\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 className=\{`flex items-center gap-3 px-3 py-2 text-sm font-medium nav-item-3d $\{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 isActive 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 ? 'nav-item-active text-white' 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 : 'text-gray-300 hover:text-white'
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}`\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 >
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <item.icon className="w-5 h-5 relative z-10" />
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <span className="relative z-10">\{item.title\}</span>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </Link>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </li>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \})\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </ul>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </nav>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 </aside>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 <main className="flex-1 relative">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <div className="p-4">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \{children\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 </main>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \}
+\f1\fs32 \cf3 \
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs20 \cf2 import React from "react";
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 import \{ Link, useLocation \} from "react-router-dom";
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 import \{ createPageUrl \} from "@/utils";
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 import \{ Clock, Calculator, BarChart3, Download, Upload, Settings \} from "lucide-react";
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 // Block 1: Hauptfunktionen
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 const block1Items = [
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 \{ title: "Zeiterfassung", url: createPageUrl("Arbeit2"), icon: Clock \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 \{ title: "Lohnberechnung", url: createPageUrl("Lohn"), icon: Calculator \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 \{ title: "Jahresbilanz", url: createPageUrl("Jahresbilanz"), icon: BarChart3 \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 ];
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 // Block 2: Datenverwaltung
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 const block2Items = [
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 \{ title: "Wiederherstellen", url: createPageUrl("Wiederherstellen"), icon: Upload \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 \{ title: "Backup", url: createPageUrl("Backup"), icon: Download \},
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 ];
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 export default function Layout(\{ children \}) \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 const location = useLocation();
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 return (
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0 <div style=\{\{ minHeight: '100vh', background: 'linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)', fontFamily: 'Inter, sans-serif' \}\}>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 <style>\{`
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 * \{ 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 margin: 0; 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 padding: 0; 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-sizing: border-box; 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 body \{ 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460) !important; 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 color: #e2e8f0 !important; 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 font-family: 'Inter', sans-serif !important;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .main-container \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3), transparent 50%),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3), transparent 50%),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 radial-gradient(circle at 40% 40%, rgba(120, 198, 255, 0.3), transparent 50%),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: backgroundShift 20s ease-in-out infinite;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes backgroundShift \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0%, 100% \{ filter: hue-rotate(0deg) saturate(1); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 50% \{ filter: hue-rotate(30deg) saturate(1.2); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .glassmorphism \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 linear-gradient(135deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 255, 255, 0.1) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 255, 255, 0.05) 25%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 255, 255, 0.02) 50%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 255, 255, 0.08) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 backdrop-filter: blur(20px) saturate(180%);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 1px solid rgba(255, 255, 255, 0.15);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 16px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 20px 60px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 10px 30px rgba(0, 0, 0, 0.2),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.25),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 overflow: hidden;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .glassmorphism::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: -100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: left 0.8s;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .glassmorphism:hover::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .glassmorphism:hover \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: translateY(-8px);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 35px 120px rgba(0, 0, 0, 0.5),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 25px 60px rgba(0, 0, 0, 0.4),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 15px 30px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.35),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-color: rgba(255, 255, 255, 0.25);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .sidebar-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 linear-gradient(180deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(30, 30, 70, 0.95) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(20, 25, 50, 0.98) 50%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(15, 20, 40, 0.99) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 backdrop-filter: blur(25px) saturate(200%);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-right: 2px solid rgba(255, 255, 255, 0.1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 15px 0 50px rgba(0, 0, 0, 0.5),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 8px 0 25px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset -2px 0 0 rgba(255, 255, 255, 0.08);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 overflow: hidden;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .sidebar-3d::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 right: -3px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 3px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(180deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(120, 119, 198, 0.8), 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 119, 198, 0.6), 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(120, 198, 255, 0.8)
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: sidebarGlow 3s ease-in-out infinite alternate;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes sidebarGlow \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ opacity: 0.3; transform: scaleY(0.8); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ opacity: 1; transform: scaleY(1.2); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .sidebar-title \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background-clip: text;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 -webkit-background-clip: text;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 -webkit-text-fill-color: transparent;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: titleGlow 2s ease-in-out infinite alternate;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes titleGlow \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ filter: brightness(1); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ filter: brightness(1.3); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 overflow: hidden;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 15px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(255, 255, 255, 0.03);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 1px solid rgba(255, 255, 255, 0.05);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-3d::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: -100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(90deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transparent, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 255, 255, 0.1), 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(120, 119, 198, 0.2),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(255, 255, 255, 0.1), 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transparent
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: left 0.6s ease;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-3d:hover::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-3d::after \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: translate(-50%, -50%);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.4s ease;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-3d:hover::after \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 200px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 200px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-3d:hover \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: translateY(-5px);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 15px 40px rgba(0, 0, 0, 0.4),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 8px 20px rgba(120, 119, 198, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(255, 255, 255, 0.08);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-color: rgba(255, 255, 255, 0.15);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .nav-item-active \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(135deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(102, 126, 234, 0.8) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(118, 75, 162, 0.8) 50%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(120, 119, 198, 0.8) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 10px 30px rgba(102, 126, 234, 0.5),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 5px 15px rgba(118, 75, 162, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-color: rgba(255, 255, 255, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: activeGlow 2s ease-in-out infinite alternate;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes activeGlow \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5), 0 5px 15px rgba(118, 75, 162, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ box-shadow: 0 15px 45px rgba(102, 126, 234, 0.7), 0 8px 25px rgba(118, 75, 162, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .button-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(145deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(71, 85, 105, 0.8) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(51, 65, 85, 0.9) 50%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(30, 41, 59, 0.95) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 1px solid rgba(148, 163, 184, 0.4);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 12px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 8px 20px rgba(0, 0, 0, 0.2),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 4px 10px rgba(0, 0, 0, 0.15),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.2),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 overflow: hidden;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 cursor: pointer;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .button-3d::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: -50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: -50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 200%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 200%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: rotate(45deg);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.6s;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 opacity: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .button-3d:hover::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: buttonShine 0.6s ease-out;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes buttonShine \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ opacity: 0; transform: translateX(-100%) translateY(-100%) rotate(45deg); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 50% \{ opacity: 1; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ opacity: 0; transform: translateX(100%) translateY(100%) rotate(45deg); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .button-3d:hover \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: translateY(-5px);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 20px 50px rgba(0, 0, 0, 0.4),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 10px 25px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-color: rgba(148, 163, 184, 0.6);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .button-3d:active \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: translateY(-2px);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 8px 20px rgba(0, 0, 0, 0.5),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 3px 8px rgba(0, 0, 0, 0.4);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .button-active \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(145deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(102, 126, 234, 0.9) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(118, 75, 162, 0.9) 50%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(59, 130, 246, 0.9) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 12px 35px rgba(102, 126, 234, 0.5),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 6px 18px rgba(118, 75, 162, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.3);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: buttonActiveGlow 2s ease-in-out infinite alternate;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes buttonActiveGlow \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5), 0 6px 18px rgba(118, 75, 162, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ box-shadow: 0 18px 50px rgba(102, 126, 234, 0.7), 0 10px 30px rgba(118, 75, 162, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .table-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 linear-gradient(135deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(51, 65, 85, 0.6) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(30, 41, 59, 0.7) 50%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(15, 23, 42, 0.8) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 backdrop-filter: blur(15px) saturate(180%);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 1px solid rgba(148, 163, 184, 0.25);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 16px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 20px 60px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 10px 30px rgba(0, 0, 0, 0.2),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.15),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 overflow: hidden;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .table-3d::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 right: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(90deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transparent,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(102, 126, 234, 0.8),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(118, 75, 162, 0.8),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(120, 119, 198, 0.8),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transparent
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: tableHeaderGlow 3s ease-in-out infinite;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes tableHeaderGlow \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0%, 100% \{ opacity: 0.5; transform: scaleX(0.8); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 50% \{ opacity: 1; transform: scaleX(1.2); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .table-row-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(71, 85, 105, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .table-row-3d:hover \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(100, 116, 139, 0.4);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transform: translateX(5px);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 -5px 0 20px rgba(102, 126, 234, 0.2),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 5px 15px rgba(0, 0, 0, 0.3);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-left: 2px solid rgba(102, 126, 234, 0.6);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .input-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 linear-gradient(135deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(30, 41, 59, 0.9) 0%,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(15, 23, 42, 0.95) 100%
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 1px solid rgba(148, 163, 184, 0.4);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 10px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 color: #e2e8f0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 2px 5px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 1px 0 rgba(255, 255, 255, 0.1),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 1px 2px rgba(0, 0, 0, 0.1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 cursor: text;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 font-size: 14px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 font-weight: 400;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 min-height: 38px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 padding: 6px 10px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .input-3d::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 right: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 bottom: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(135deg, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(102, 126, 234, 0.1), 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transparent 50%, 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 rgba(118, 75, 162, 0.1)
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: inherit;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 opacity: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: opacity 0.3s;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .input-3d:focus \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 inset 0 3px 8px rgba(0, 0, 0, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 0 0 2px rgba(102, 126, 234, 0.6),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 8px 25px rgba(102, 126, 234, 0.3),
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0 4px 15px rgba(0, 0, 0, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 outline: none;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-color: rgba(102, 126, 234, 0.8);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .input-3d:focus::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 opacity: 1;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .input-3d:read-only \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(45, 55, 72, 0.7);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 color: #94a3b8;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 cursor: default;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .loader \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 50px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 50px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 4px solid rgba(74, 85, 104, 0.2);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-top: 4px solid transparent;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: spin 1s linear infinite;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .loader::before \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: -4px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: -4px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 right: -4px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 bottom: -4px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 4px solid transparent;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-top: 4px solid rgba(102, 126, 234, 0.8);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: spin 1.5s linear infinite reverse;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .loader::after \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 content: '';
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 right: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 bottom: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 2px solid transparent;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-top: 2px solid rgba(118, 75, 162, 0.8);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: spin 0.8s linear infinite;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes spin \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ transform: rotate(0deg); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ transform: rotate(360deg); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .toast-container \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: fixed;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 bottom: 2rem;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 right: 2rem;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 z-index: 1000;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: toastSlideIn 0.5s ease-out;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes toastSlideIn \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ transform: translateY(100%); opacity: 0; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ transform: translateY(0); opacity: 1; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .version-tag \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 font-size: 0.7rem;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 color: rgba(160, 174, 192, 0.8);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 margin-left: 0.5rem;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(45deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 padding: 2px 8px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 10px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border: 1px solid rgba(255, 255, 255, 0.1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: versionPulse 3s ease-in-out infinite;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes versionPulse \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0%, 100% \{ opacity: 0.6; transform: scale(1); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 50% \{ opacity: 1; transform: scale(1.05); \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .floating-particles \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: fixed;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 top: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: 0;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 100%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 pointer-events: none;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 z-index: 1;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 .particle \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: absolute;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 height: 2px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(255, 255, 255, 0.1);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 50%;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animation: float 20s infinite linear;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @keyframes float \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 0% \{ transform: translateY(100vh) rotate(0deg); opacity: 0; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 10% \{ opacity: 1; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 90% \{ opacity: 1; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 100% \{ transform: translateY(-100px) rotate(360deg); opacity: 0; \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 @media (max-width: 768px) \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 .sidebar-3d \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 position: relative;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 backdrop-filter: blur(20px);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 ::-webkit-scrollbar \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 width: 8px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 ::-webkit-scrollbar-track \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: rgba(30, 41, 59, 0.3);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 10px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 ::-webkit-scrollbar-thumb \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 border-radius: 10px;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 ::-webkit-scrollbar-thumb:hover \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 background: linear-gradient(135deg, rgba(102, 126, 234, 1), rgba(118, 75, 162, 1));
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 `\}</style>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 <div className="floating-particles">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \{[...Array(20)].map((_, i) => (
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <div
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 key=\{i\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 className="particle"
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 style=\{\{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 left: `$\{Math.random() * 100\}%`,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animationDelay: `$\{Math.random() * 20\}s`,
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 animationDuration: `$\{15 + Math.random() * 10\}s`
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 />
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 ))\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 <div className="flex w-full main-container">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 <aside className="w-64 flex-shrink-0 sidebar-3d p-4 flex flex-col relative self-start sticky top-0 h-screen">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <div className="mb-6">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <div className="flex items-center gap-3">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <div className="relative">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <Settings className="w-10 h-10 text-blue-400" />
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <Clock className="w-6 h-6 text-white absolute -bottom-1 -right-1" />
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <h1 className="text-2xl font-bold sidebar-title">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 WorkClock
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <span className="version-tag">V.3.5</span>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </h1>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <nav className="flex-grow">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <ul className="space-y-2">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \{block1Items.map((item) => \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 const isActive = location.pathname === item.url || 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 (item.url.includes('/Arbeit2') && location.pathname === '/');
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 return (
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <li key=\{item.title\}>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <Link
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 to=\{item.url\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 className=\{`flex items-center gap-3 px-3 py-2 text-sm font-medium nav-item-3d $\{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 isActive 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 ? 'nav-item-active text-white' 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 : 'text-gray-300 hover:text-white'
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}`\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 >
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <item.icon className="w-5 h-5 relative z-10" />
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <span className="relative z-10">\{item.title\}</span>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </Link>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </li>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \})\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </ul>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <div className="my-6 px-3">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Verwaltung</p>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <ul className="space-y-2">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \{block2Items.map((item) => \{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 const isActive = location.pathname === item.url;
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 return (
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <li key=\{item.title\}>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <Link
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 to=\{item.url\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 className=\{`flex items-center gap-3 px-3 py-2 text-sm font-medium nav-item-3d $\{
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 isActive 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 ? 'nav-item-active text-white' 
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 : 'text-gray-300 hover:text-white'
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}`\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 >
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <item.icon className="w-5 h-5 relative z-10" />
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <span className="relative z-10">\{item.title\}</span>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </Link>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </li>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \})\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </ul>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </nav>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 </aside>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 <main className="flex-1 relative">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 <div className="p-4">
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \{children\}
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 </main>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0\'a0\'a0 </div>
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \'a0 );
+\f1\fs32 \cf3 \
+
+\f0\fs20 \cf2 \}
+\f1\fs32 \cf3 \
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+
+\f2 \cf2 \'a0
+\f1 \cf3 \
+}
